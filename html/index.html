@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aprende IA — Inteligencia artificial en español para emprendedores latinos en los Estados Unidos. Guías, cursos y recursos para crecer tu negocio con IA.">
+<meta name="keywords" content="inteligencia artificial, IA en español, emprendedores latinos, curso de IA, Claude AI, ChatGPT en español, aprender IA">
+<title>Aprende IA — Inteligencia Artificial en Español</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── TOKENS ── */
+:root {
+  --bg:        #FEFCE8;
+  --bg2:       #FEF9C3;
+  --w:         #FFFFFF;
+  --indigo:    #2D1B69;
+  --indigo-mid:#3D2A85;
+  --indigo-dk: #160C3D;
+  --amber:     #F59E0B;
+  --amber-lt:  #FBBF24;
+  --teal:      #0D9488;
+  --text:      #1C1917;
+  --text2:     #3D3D3D;
+  --muted:     #78716C;
+  --muted2:    #A8A29E;
+  --border:    rgba(45,27,105,0.10);
+  --border2:   rgba(45,27,105,0.18);
+}
+
+/* ── RESET ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 56px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.35s;
+  background:rgba(254,252,232,0.0);
+}
+nav.scrolled{
+  background:rgba(254,252,232,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Inter',sans-serif;font-size:16px;
+}
+.nav-logo-icon{flex-shrink:0}
+.nav-logo-word{font-weight:300;color:var(--indigo);letter-spacing:-0.02em}
+.nav-logo-word span{font-weight:700;color:var(--amber)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{
+  font-size:12px;font-weight:500;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--text2);
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--indigo)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang-toggle{
+  font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  border:1.5px solid var(--border2);border-radius:40px;
+  padding:5px 14px;cursor:pointer;background:transparent;
+  color:var(--muted);transition:all 0.2s;
+}
+.lang-toggle:hover{border-color:var(--indigo);color:var(--indigo)}
+.lang-toggle .active{color:var(--indigo)}
+.nav-cta{
+  font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  background:var(--indigo);color:var(--w);
+  padding:9px 22px;border-radius:2px;
+  transition:background 0.2s;
+}
+.nav-cta:hover{background:var(--indigo-mid)}
+
+/* ── HAMBURGER ── */
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:40px;height:40px;background:transparent;
+  border:1.5px solid var(--border2);border-radius:6px;cursor:pointer;padding:0;
+}
+.hamburger span{display:block;width:16px;height:1.5px;background:var(--text);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── MOBILE MENU ── */
+.mobile-menu{
+  position:fixed;top:68px;right:0;bottom:0;width:280px;
+  background:var(--w);border-left:1px solid var(--border);
+  z-index:99;transform:translateX(100%);
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  padding:32px 24px;display:flex;flex-direction:column;gap:24px;
+  box-shadow:-8px 0 40px rgba(0,0,0,0.06);
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu-links{list-style:none;display:flex;flex-direction:column;gap:2px}
+.mobile-menu-links a{
+  display:block;font-size:17px;font-weight:500;
+  color:var(--text);padding:11px 8px;border-radius:6px;transition:all 0.2s;
+}
+.mobile-menu-links a:hover{background:var(--bg2);color:var(--indigo);padding-left:14px}
+.mobile-menu-cta{
+  display:block;text-align:center;
+  font-size:13px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  background:var(--indigo);color:var(--w);padding:15px;border-radius:2px;transition:all 0.2s;
+}
+.mobile-menu-cta:hover{background:var(--indigo-mid)}
+.menu-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.25);
+  z-index:98;opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.menu-overlay.open{opacity:1;pointer-events:all}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:120px 56px 96px;
+  position:relative;overflow:hidden;background:var(--bg);
+}
+.hero-rule{
+  position:absolute;top:0;right:200px;bottom:0;
+  width:1px;background:var(--border);pointer-events:none;
+}
+.hero-content{position:relative;z-index:1;max-width:1100px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:36px;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--amber)}
+.hero-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(52px,7.5vw,112px);
+  font-weight:700;line-height:1.0;letter-spacing:-0.025em;
+  color:var(--text);margin-bottom:36px;
+}
+.hero-h1 .italic{font-style:italic;color:var(--indigo)}
+.hero-h1 .amber{color:var(--amber)}
+.hero-h1 .thin{font-weight:400}
+.hero-sub-row{display:flex;align-items:flex-end;gap:64px;flex-wrap:wrap}
+.hero-sub{
+  font-size:16px;font-weight:300;color:var(--muted);
+  line-height:1.85;max-width:420px;
+}
+.hero-sub em{color:var(--text2);font-style:normal;font-weight:400}
+.hero-sub .en-hint{display:block;margin-top:10px;font-style:italic;opacity:0.6;font-size:14px}
+.hero-ctas{display:flex;gap:16px;align-items:center;flex-shrink:0;padding-bottom:4px}
+.btn-primary{
+  font-size:12px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;
+  background:var(--indigo);color:var(--w);
+  padding:15px 34px;border-radius:2px;
+  transition:all 0.25s;white-space:nowrap;
+}
+.btn-primary:hover{background:var(--indigo-mid);transform:translateY(-1px)}
+.btn-primary.amber{background:var(--amber);color:var(--indigo-dk)}
+.btn-primary.amber:hover{background:var(--amber-lt)}
+.btn-ghost{
+  font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:6px;
+  transition:color 0.2s;white-space:nowrap;
+}
+.btn-ghost:hover{color:var(--text)}
+.btn-ghost::after{content:'↓';font-size:14px}
+.hero-stats-row{
+  display:flex;gap:56px;margin-top:80px;
+  padding-top:40px;border-top:1px solid var(--border);
+}
+.hero-stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:700;color:var(--text);line-height:1;margin-bottom:5px;
+}
+.hero-stat-label{font-size:11px;font-weight:400;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
+
+/* ── MARQUEE ── */
+.marquee-section{
+  padding:14px 0;background:var(--indigo-dk);overflow:hidden;
+}
+.marquee-inner{display:flex;gap:0;white-space:nowrap;animation:marquee 28s linear infinite}
+.marquee-item{
+  font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);padding:0 32px;
+  border-right:1px solid rgba(255,255,255,0.1);
+}
+.marquee-item .dot{color:var(--amber-lt)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SHARED SECTION STYLES ── */
+section{padding:112px 56px}
+.inner{max-width:1160px;margin:0 auto}
+.section-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:20px;
+}
+.section-eyebrow::before{content:'';width:22px;height:1px;background:var(--amber)}
+.section-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,4.5vw,58px);font-weight:700;
+  letter-spacing:-0.02em;line-height:1.1;color:var(--text);
+}
+.section-h2 .accent{color:var(--indigo);font-style:italic}
+.section-h2 .amber{color:var(--amber)}
+.section-h2 .thin{font-weight:400}
+.section-body{font-size:15px;font-weight:300;color:var(--muted);line-height:1.9;max-width:500px}
+
+/* ── ABOUT ── */
+#about{background:var(--w);padding-bottom:96px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.about-left .section-h2{margin-bottom:20px;margin-top:4px}
+.about-left .section-body{margin-bottom:14px}
+.about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:48px;background:var(--border)}
+.about-pillar{
+  padding:22px 20px;background:var(--w);
+  transition:background 0.2s;
+}
+.about-pillar:hover{background:var(--bg)}
+.pillar-num{
+  font-size:10px;font-weight:600;letter-spacing:0.18em;
+  color:var(--amber);margin-bottom:10px;
+}
+.pillar-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px}
+.pillar-desc{font-size:12px;font-weight:300;color:var(--muted);line-height:1.65}
+.about-right{
+  padding-top:60px;
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+.about-big-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(88px,11vw,148px);font-weight:700;letter-spacing:-0.06em;line-height:0.88;
+  color:transparent;-webkit-text-stroke:1.5px rgba(45,27,105,0.10);
+  user-select:none;
+}
+.about-badge{
+  margin-top:32px;padding:28px 32px;
+  border:1px solid var(--border2);background:var(--bg);
+}
+.about-badge-num{
+  font-family:'Playfair Display',serif;
+  font-size:38px;font-weight:700;color:var(--indigo);line-height:1;margin-bottom:6px;
+}
+.about-badge-text{font-size:12px;font-weight:300;color:var(--muted);line-height:1.65}
+
+/* ── PRODUCT FEATURE ── */
+#product{background:var(--indigo);padding:96px 56px}
+.product-inner{max-width:1160px;margin:0 auto}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.product-left{}
+.product-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber-lt);margin-bottom:20px;
+}
+.product-eyebrow::before{content:'';width:22px;height:1px;background:var(--amber-lt)}
+.product-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-0.02em;
+  line-height:1.1;color:var(--w);margin-bottom:20px;
+}
+.product-h2 .amber{color:var(--amber-lt)}
+.product-body{font-size:15px;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.9;margin-bottom:32px;max-width:480px}
+.product-price{
+  display:inline-flex;align-items:baseline;gap:8px;
+  margin-bottom:28px;
+}
+.product-price-num{
+  font-family:'Playfair Display',serif;
+  font-size:52px;font-weight:700;color:var(--amber-lt);line-height:1;
+}
+.product-price-label{font-size:13px;font-weight:300;color:rgba(255,255,255,0.45)}
+.product-includes{
+  display:flex;flex-direction:column;gap:10px;margin-bottom:36px;
+}
+.product-include-item{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;font-weight:300;color:rgba(255,255,255,0.72);line-height:1.5;
+}
+.product-include-item::before{
+  content:'✓';color:var(--amber-lt);font-weight:700;font-size:13px;flex-shrink:0;margin-top:1px;
+}
+.product-right{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:48px 40px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:4px;
+}
+.product-icon-wrap{
+  width:120px;height:120px;margin-bottom:28px;
+}
+.product-card-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;color:var(--w);text-align:center;
+  margin-bottom:8px;
+}
+.product-card-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.45);text-align:center;line-height:1.7;margin-bottom:24px}
+.product-card-badge{
+  display:inline-block;
+  background:var(--amber);color:var(--indigo-dk);
+  font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  padding:4px 14px;
+}
+
+/* ── FOR WHO ── */
+#forwho{background:var(--bg);padding:96px 56px}
+.forwho-inner{max-width:1160px;margin:0 auto}
+.forwho-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.forwho-profiles{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-top:40px}
+.profile-card{
+  background:var(--w);padding:28px 24px;
+  transition:background 0.2s;border-left:3px solid transparent;
+}
+.profile-card:hover{background:var(--bg);border-left-color:var(--amber)}
+.profile-emoji{font-size:22px;margin-bottom:10px;display:block}
+.profile-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.profile-desc{font-size:13px;font-weight:300;color:var(--muted);line-height:1.75}
+.forwho-right{padding-top:40px}
+.forwho-quote{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(22px,3vw,36px);font-weight:400;font-style:italic;
+  color:var(--indigo);line-height:1.5;margin-bottom:24px;
+}
+.forwho-quote-attr{font-size:12px;font-weight:400;color:var(--muted);letter-spacing:0.06em}
+
+/* ── VALUE LADDER ── */
+#ladder{background:var(--w);padding:96px 56px}
+.ladder-inner{max-width:1160px;margin:0 auto}
+.ladder-header{margin-bottom:56px}
+.ladder-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border)}
+.ladder-step{
+  background:var(--bg);padding:36px 24px;
+  position:relative;transition:background 0.25s;
+}
+.ladder-step:hover{background:var(--w)}
+.ladder-step.active{background:var(--indigo);}
+.ladder-step::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--amber);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s;
+}
+.ladder-step:hover::after{transform:scaleX(1)}
+.ladder-step.active::after{transform:scaleX(1);background:var(--amber-lt)}
+.step-num{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:700;
+  color:rgba(45,27,105,0.08);
+  line-height:1;margin-bottom:20px;
+}
+.ladder-step.active .step-num{color:rgba(255,255,255,0.12)}
+.step-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.ladder-step.active .step-title{color:var(--w)}
+.step-price{font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--amber);margin-bottom:10px}
+.ladder-step.active .step-price{color:var(--amber-lt)}
+.step-desc{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8}
+.ladder-step.active .step-desc{color:rgba(255,255,255,0.55)}
+.step-badge{
+  position:absolute;top:14px;right:14px;
+  background:var(--amber-lt);color:var(--indigo-dk);
+  font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:3px 9px;
+}
+
+/* ── WAITLIST CTA ── */
+#waitlist{background:var(--indigo-dk);padding:80px 56px;text-align:center}
+.waitlist-inner{max-width:680px;margin:0 auto}
+.waitlist-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;justify-content:center;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber-lt);margin-bottom:20px;
+}
+.waitlist-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-0.02em;
+  color:var(--w);line-height:1.15;margin-bottom:18px;
+}
+.waitlist-h2 .amber{color:var(--amber-lt)}
+.waitlist-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.85;margin-bottom:40px}
+.waitlist-form{display:flex;gap:0;max-width:500px;margin:0 auto 16px}
+.waitlist-input{
+  flex:1;font-family:'Inter',sans-serif;font-size:14px;font-weight:300;
+  color:var(--text);background:var(--w);
+  border:none;padding:16px 20px;outline:none;
+}
+.waitlist-btn{
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--amber);color:var(--indigo-dk);
+  border:none;padding:16px 28px;cursor:pointer;
+  transition:background 0.2s;white-space:nowrap;
+}
+.waitlist-btn:hover{background:var(--amber-lt)}
+.waitlist-note{font-size:12px;font-weight:300;color:rgba(255,255,255,0.3);letter-spacing:0.03em}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start}
+.contact-left .section-h2{margin-bottom:16px;margin-top:4px}
+.contact-info{margin-top:48px;display:flex;flex-direction:column;gap:24px}
+.contact-item-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted2);margin-bottom:5px}
+.contact-item-val{font-size:15px;font-weight:300;color:var(--text2)}
+.contact-item-val a{color:var(--indigo);transition:opacity 0.2s}
+.contact-item-val a:hover{opacity:0.7}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group label{
+  display:block;font-size:10px;font-weight:600;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:7px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;font-family:'Inter',sans-serif;font-size:14px;font-weight:300;
+  color:var(--text);background:var(--w);
+  border:1px solid var(--border2);padding:12px 15px;
+  outline:none;transition:border-color 0.2s;resize:vertical;-webkit-appearance:none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{border-color:var(--indigo)}
+.form-group select option{background:var(--w);color:var(--text)}
+.form-group textarea{min-height:110px}
+.btn-submit{
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;
+  background:var(--indigo);color:var(--w);
+  border:none;padding:16px 40px;cursor:pointer;
+  transition:all 0.25s;width:100%;margin-top:6px;
+}
+.btn-submit:hover{background:var(--indigo-mid)}
+.form-success{display:none;text-align:center;padding:36px 20px;border:1px solid var(--border2);background:var(--w);margin-top:6px}
+.form-success.show{display:block}
+.form-success p{font-size:15px;font-weight:300;color:var(--muted)}
+.form-success strong{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--indigo);display:block;margin-bottom:8px}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--text);padding:44px 56px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:32px;
+}
+.footer-brand{font-family:'Inter',sans-serif;font-size:15px;font-weight:300;color:var(--w);letter-spacing:-0.01em}
+.footer-brand strong{font-weight:700;color:var(--amber-lt)}
+.footer-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,0.25);margin-top:5px;letter-spacing:0.04em}
+.footer-links{display:flex;gap:24px;justify-content:center}
+.footer-links a{
+  font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--amber-lt)}
+.footer-legal{font-size:11px;color:rgba(255,255,255,0.2);text-align:right;line-height:1.75}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* ── RESPONSIVE — 1200px ── */
+@media(max-width:1200px){
+  nav{padding:0 32px}
+  section{padding:88px 32px}
+  #hero{padding:120px 32px 80px}
+  #product{padding:80px 32px}
+  #forwho{padding:80px 32px}
+  #ladder{padding:80px 32px}
+  #waitlist{padding:64px 32px}
+  .hero-rule{display:none}
+}
+
+/* ── RESPONSIVE — 1024px ── */
+@media(max-width:1024px){
+  nav{padding:0 20px;height:60px}
+  .nav-links,.nav-cta{display:none!important}
+  .hamburger{display:flex!important}
+  .mobile-menu{top:60px}
+  section{padding:72px 24px}
+  #hero{padding:100px 24px 64px}
+  #product{padding:64px 24px}
+  #forwho{padding:64px 24px}
+  #ladder{padding:64px 24px}
+  #waitlist{padding:56px 24px}
+  .about-grid,.forwho-grid,.product-grid,.contact-grid{grid-template-columns:1fr}
+  .ladder-steps{grid-template-columns:1fr 1fr}
+  footer{grid-template-columns:1fr;text-align:center;padding:32px 24px}
+  .footer-links{justify-content:center}
+  .footer-legal{text-align:center}
+  .hero-stats-row{gap:36px}
+  .product-right{margin-top:32px}
+  .waitlist-form{flex-direction:column}
+  .waitlist-btn{padding:16px}
+}
+
+/* ── RESPONSIVE — 600px ── */
+@media(max-width:600px){
+  nav{padding:0 16px;height:56px}
+  .mobile-menu{top:56px;width:100%;border-left:none;border-top:1px solid var(--border)}
+  section{padding:56px 16px}
+  #hero{padding:80px 16px 56px}
+  #product{padding:56px 16px}
+  #forwho{padding:56px 16px}
+  #ladder{padding:56px 16px}
+  #waitlist{padding:48px 16px}
+  .hero-h1{font-size:clamp(36px,10vw,52px)}
+  .hero-sub-row{flex-direction:column;gap:28px}
+  .hero-ctas{flex-direction:column;width:100%}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;text-align:center}
+  .hero-stats-row{gap:28px;flex-wrap:wrap}
+  .about-pillars{grid-template-columns:1fr}
+  .about-big-text{font-size:80px}
+  .ladder-steps{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  footer{padding:28px 16px}
+  .footer-links{flex-wrap:wrap;gap:16px}
+}
+
+@media(max-width:380px){
+  .hero-h1{font-size:32px}
+  .nav-logo-word{font-size:13px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="28" height="28" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <defs><clipPath id="nc"><circle cx="24" cy="24" r="23.5"/></clipPath></defs>
+        <circle cx="24" cy="24" r="24" fill="#2D1B69"/>
+        <g clip-path="url(#nc)">
+          <rect x="20" y="27" width="8" height="5" rx="1" fill="rgba(255,255,255,0.82)"/>
+          <path d="M 4,52 Q 9,30 20,32 L 28,32 Q 39,30 44,52 Z" fill="rgba(255,255,255,0.82)"/>
+        </g>
+        <circle cx="24" cy="18" r="12" fill="#160C3D"/>
+        <circle cx="24" cy="20" r="6.5" fill="#F59E0B" opacity="0.20"/>
+        <text x="24" y="23" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="700" font-family="Inter, sans-serif" letter-spacing="-0.3">IA</text>
+      </svg>
+    </div>
+    <div class="nav-logo-word">aprende<span>IA</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav_about">Nosotros</a></li>
+    <li><a href="#product" data-i18n="nav_product">Producto</a></li>
+    <li><a href="#ladder" data-i18n="nav_ladder">Formación</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Toggle language">
+      <span id="lang-es" class="active">ES</span>&nbsp;·&nbsp;<span id="lang-en">EN</span>
+    </button>
+    <a href="/guia" class="nav-cta" data-i18n="nav_cta">Comprar · $19.99 →</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="mobile-menu-links">
+    <li><a href="#about" onclick="closeMenu()" data-i18n="nav_about">Nosotros</a></li>
+    <li><a href="#product" onclick="closeMenu()" data-i18n="nav_product">Producto</a></li>
+    <li><a href="#ladder" onclick="closeMenu()" data-i18n="nav_ladder">Formación</a></li>
+    <li><a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">Contacto</a></li>
+  </ul>
+  <a href="/guia" onclick="closeMenu()" class="mobile-menu-cta" data-i18n="nav_cta">Comprar · $19.99 →</a>
+</div>
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">IA para emprendedores latinos · USA</div>
+    <h1 class="hero-h1" data-i18n="hero_h1">
+      Aprende<br>
+      <span class="italic">inteligencia</span><br>
+      <span class="thin">artificial.</span>
+    </h1>
+    <div class="hero-sub-row">
+      <p class="hero-sub" data-i18n="hero_sub">
+        Guías, cursos y recursos de <em>inteligencia artificial</em> en español —
+        diseñados para emprendedores latinos en los Estados Unidos.
+        <span class="en-hint">AI education in Spanish for US Latino entrepreneurs.</span>
+      </p>
+      <div class="hero-ctas">
+        <a href="/guia" class="btn-primary amber" data-i18n="hero_cta_primary">Comprar la Guía · $19.99 →</a>
+        <a href="#product" class="btn-ghost" data-i18n="hero_cta_ghost">Ver el producto</a>
+      </div>
+    </div>
+    <div class="hero-stats-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">62M+</div>
+        <div class="hero-stat-label" data-i18n="hero_stat1">Latinos en EE.UU.</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1 de 5</div>
+        <div class="hero-stat-label" data-i18n="hero_stat2">son emprendedores</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-label" data-i18n="hero_stat3">recursos de IA en español</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-inner">
+    <span class="marquee-item">Claude AI <span class="dot">✦</span></span>
+    <span class="marquee-item">ChatGPT <span class="dot">✦</span></span>
+    <span class="marquee-item">Agentes de IA <span class="dot">✦</span></span>
+    <span class="marquee-item">Prompts en Español <span class="dot">✦</span></span>
+    <span class="marquee-item">Automatización <span class="dot">✦</span></span>
+    <span class="marquee-item">Emprendimiento Latino <span class="dot">✦</span></span>
+    <span class="marquee-item">Negocios Digitales <span class="dot">✦</span></span>
+    <span class="marquee-item">IA para Tu Negocio <span class="dot">✦</span></span>
+    <span class="marquee-item">Claude AI <span class="dot">✦</span></span>
+    <span class="marquee-item">ChatGPT <span class="dot">✦</span></span>
+    <span class="marquee-item">Agentes de IA <span class="dot">✦</span></span>
+    <span class="marquee-item">Prompts en Español <span class="dot">✦</span></span>
+    <span class="marquee-item">Automatización <span class="dot">✦</span></span>
+    <span class="marquee-item">Emprendimiento Latino <span class="dot">✦</span></span>
+    <span class="marquee-item">Negocios Digitales <span class="dot">✦</span></span>
+    <span class="marquee-item">IA para Tu Negocio <span class="dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-eyebrow" data-i18n="about_eyebrow">Quiénes Somos</div>
+        <h2 class="section-h2" data-i18n="about_h2">La IA no tiene que<br>ser <span class="accent">complicada</span><br><span class="thin">ni en inglés.</span></h2>
+        <p class="section-body" style="margin-top:22px" data-i18n="about_body">
+          Aprende IA es una marca de Simply Living Green LLC — una compañía de educación en inteligencia artificial para emprendedores latinos en los Estados Unidos. Creamos guías, cursos y recursos que hacen la IA simple, accesible y aplicable a tu negocio. Todo en español.
+        </p>
+        <p class="section-body" style="margin-top:12px;font-style:italic;opacity:0.6;font-size:14px">
+          AI education in Spanish for Latino entrepreneurs in the United States.
+        </p>
+        <div class="about-pillars">
+          <div class="about-pillar">
+            <div class="pillar-num">01</div>
+            <div class="pillar-title" data-i18n="pillar1_title">100% en Español</div>
+            <div class="pillar-desc" data-i18n="pillar1_desc">Contenido creado nativamente en español, no traducido</div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-num">02</div>
+            <div class="pillar-title" data-i18n="pillar2_title">Para Tu Negocio</div>
+            <div class="pillar-desc" data-i18n="pillar2_desc">Aplicaciones prácticas, no teoría. Resultados reales.</div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-num">03</div>
+            <div class="pillar-title" data-i18n="pillar3_title">NYC + Puerto Rico</div>
+            <div class="pillar-desc" data-i18n="pillar3_desc">Nacidos en la comunidad latina de los Estados Unidos</div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-num">04</div>
+            <div class="pillar-title" data-i18n="pillar4_title">Siempre Accesible</div>
+            <div class="pillar-desc" data-i18n="pillar4_desc">Precios pensados para el emprendedor que está empezando</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right reveal reveal-delay-2">
+        <div class="about-big-text">IA</div>
+        <div class="about-badge">
+          <div class="about-badge-num">62M+</div>
+          <div class="about-badge-text" data-i18n="badge_text">Latinos en EE.UU.<br>merecen aprender IA en su idioma</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product" style="background:var(--indigo);padding:96px 56px">
+  <div class="product-inner">
+    <div class="product-grid">
+      <div class="product-left reveal">
+        <div class="product-eyebrow" data-i18n="product_eyebrow">Primer Producto · Disponible Pronto</div>
+        <h2 class="product-h2" data-i18n="product_h2">La guía definitiva<br>para usar <span class="amber">Claude AI</span><br>en tu negocio.</h2>
+        <p class="product-body" data-i18n="product_body">
+          Una guía práctica y completa en español. Aprende a configurar Claude, crear agentes personalizados, organizar tu flujo de trabajo con IA, y usar skills para automatizar tareas repetitivas en tu negocio.
+        </p>
+        <div class="product-price">
+          <div class="product-price-num">$19</div>
+          <div class="product-price-label">.99 USD · precio de lanzamiento</div>
+        </div>
+        <div class="product-includes">
+          <div class="product-include-item" data-i18n="pi1">Configuración completa de Claude AI paso a paso</div>
+          <div class="product-include-item" data-i18n="pi2">Cómo crear y usar agentes personalizados</div>
+          <div class="product-include-item" data-i18n="pi3">Estructura de carpetas y flujo de trabajo con IA</div>
+          <div class="product-include-item" data-i18n="pi4">Prompts en español listos para usar</div>
+          <div class="product-include-item" data-i18n="pi5">Acceso a actualizaciones futuras</div>
+        </div>
+        <a href="/guia" class="btn-primary amber" data-i18n="product_cta">Comprar la Guía · $19.99 →</a>
+      </div>
+      <div class="product-right reveal reveal-delay-2">
+        <div class="product-icon-wrap">
+          <svg width="120" height="120" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <defs><clipPath id="pc"><circle cx="24" cy="24" r="23.5"/></clipPath></defs>
+            <circle cx="24" cy="24" r="24" fill="#160C3D"/>
+            <g clip-path="url(#pc)">
+              <rect x="20" y="27" width="8" height="5" rx="1" fill="rgba(255,255,255,0.82)"/>
+              <path d="M 4,52 Q 9,30 20,32 L 28,32 Q 39,30 44,52 Z" fill="rgba(255,255,255,0.82)"/>
+            </g>
+            <circle cx="24" cy="18" r="12" fill="#0D0720"/>
+            <circle cx="24" cy="20" r="6.5" fill="#F59E0B" opacity="0.25"/>
+            <text x="24" y="23" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="700" font-family="Inter, sans-serif" letter-spacing="-0.3">IA</text>
+          </svg>
+        </div>
+        <div class="product-card-title" data-i18n="product_card_title">Guía: Claude AI en Español</div>
+        <div class="product-card-sub" data-i18n="product_card_sub">Tu primer paso en el mundo de la<br>inteligencia artificial para negocios</div>
+        <div class="product-card-badge" data-i18n="product_card_badge" style="background:var(--teal);color:#fff">✓ Disponible Ahora</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section id="forwho" style="background:var(--bg);padding:96px 56px">
+  <div class="forwho-inner">
+    <div class="forwho-grid">
+      <div class="forwho-left reveal">
+        <div class="section-eyebrow" data-i18n="forwho_eyebrow">¿Para Quién Es?</div>
+        <h2 class="section-h2" data-i18n="forwho_h2">Para el emprendedor<br>latino que quiere<br><span class="accent">crecer con IA.</span></h2>
+        <div class="forwho-profiles">
+          <div class="profile-card">
+            <span class="profile-emoji">💼</span>
+            <div class="profile-title" data-i18n="prof1_title">El dueño de negocio</div>
+            <div class="profile-desc" data-i18n="prof1_desc">Tienes un negocio funcionando pero quieres usar IA para ahorrar tiempo y hacer más con menos.</div>
+          </div>
+          <div class="profile-card">
+            <span class="profile-emoji">🌱</span>
+            <div class="profile-title" data-i18n="prof2_title">El que está empezando</div>
+            <div class="profile-desc" data-i18n="prof2_desc">No tienes presencia online todavía. Quieres construir desde cero usando herramientas modernas.</div>
+          </div>
+          <div class="profile-card">
+            <span class="profile-emoji">📱</span>
+            <div class="profile-title" data-i18n="prof3_title">El creador de contenido</div>
+            <div class="profile-desc" data-i18n="prof3_desc">Creas contenido en español y quieres automatizar procesos y escalar sin perder tu voz auténtica.</div>
+          </div>
+          <div class="profile-card">
+            <span class="profile-emoji">🚀</span>
+            <div class="profile-title" data-i18n="prof4_title">El profesional independiente</div>
+            <div class="profile-desc" data-i18n="prof4_desc">Freelancer, consultor, coach. Quieres usar IA para ofrecer más valor a tus clientes.</div>
+          </div>
+        </div>
+      </div>
+      <div class="forwho-right reveal reveal-delay-2">
+        <div class="forwho-quote" data-i18n="forwho_quote">
+          "La inteligencia artificial no va a reemplazar a los emprendedores latinos — pero los emprendedores latinos que saben usar IA van a reemplazar a los que no."
+        </div>
+        <div class="forwho-quote-attr" data-i18n="forwho_attr">— Filosofía de Aprende IA</div>
+        <div style="margin-top:48px;padding:28px 24px;border:1px solid var(--border2);background:var(--w)">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted2);margin-bottom:12px">El mercado que servimos</div>
+          <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--indigo);line-height:1;margin-bottom:6px">62M+</div>
+          <div style="font-size:12px;font-weight:300;color:var(--muted);line-height:1.65">Latinos en los Estados Unidos<br>— el mercado más dinámico del país</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE LADDER -->
+<section id="ladder">
+  <div class="ladder-inner">
+    <div class="ladder-header reveal">
+      <div class="section-eyebrow" data-i18n="ladder_eyebrow">Ruta de Aprendizaje</div>
+      <h2 class="section-h2" data-i18n="ladder_h2">Desde tu primera guía<br>hasta <span class="accent">dominar la IA.</span></h2>
+    </div>
+    <div class="ladder-steps">
+      <div class="ladder-step active reveal">
+        <div class="step-num">01</div>
+        <div class="step-title" data-i18n="step1_title">La Guía</div>
+        <div class="step-price">$19.99</div>
+        <div class="step-desc" data-i18n="step1_desc">Configura Claude AI desde cero y empieza a usarlo en tu negocio esta semana.</div>
+        <div class="step-badge">Ahora</div>
+      </div>
+      <div class="ladder-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-title" data-i18n="step2_title">El Curso</div>
+        <div class="step-price">$197</div>
+        <div class="step-desc" data-i18n="step2_desc">Video curso completo: agentes, automatización y estrategia de IA para tu industria.</div>
+      </div>
+      <div class="ladder-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-title" data-i18n="step3_title">Membresía</div>
+        <div class="step-price">$47/mes</div>
+        <div class="step-desc" data-i18n="step3_desc">Comunidad, actualizaciones mensuales y herramientas nuevas cada mes. Siempre a la vanguardia.</div>
+      </div>
+      <div class="ladder-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-title" data-i18n="step4_title">Done-With-You</div>
+        <div class="step-price">$997+</div>
+        <div class="step-desc" data-i18n="step4_desc">Implementamos tu estrategia de IA juntos. Sesiones 1:1, configuración personalizada.</div>
+      </div>
+      <div class="ladder-step reveal reveal-delay-3">
+        <div class="step-num">05</div>
+        <div class="step-title" data-i18n="step5_title">Agencia IA</div>
+        <div class="step-price">Cotizar</div>
+        <div class="step-desc" data-i18n="step5_desc">Implementación completa de IA en tu empresa. Para negocios listos para transformarse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUY NOW -->
+<section id="waitlist" style="background:var(--indigo-dk);padding:80px 56px;text-align:center">
+  <div class="waitlist-inner reveal">
+    <div class="waitlist-eyebrow" data-i18n="waitlist_eyebrow">· Disponible Ahora ·</div>
+    <h2 class="waitlist-h2" data-i18n="waitlist_h2">Empieza hoy.<br>La IA te espera.</h2>
+    <p class="waitlist-sub" data-i18n="waitlist_sub">
+      Precio de lanzamiento: <strong style="color:var(--amber-lt)">$19.99 USD</strong> — pago único, acceso inmediato.
+      Nueve módulos, más de 180 prompts, y todo lo que necesitas para arrancar hoy.
+    </p>
+    <div style="margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <a href="/guia" class="waitlist-btn" style="display:inline-block;padding:18px 40px;font-size:18px;font-weight:800;text-decoration:none" data-i18n="waitlist_btn">
+        Comprar la Guía · $19.99 →
+      </a>
+      <p class="waitlist-note" data-i18n="waitlist_note">⚡ Acceso inmediato · Pago único · Sin suscripción</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-eyebrow" data-i18n="contact_eyebrow">Contacto</div>
+        <h2 class="section-h2" data-i18n="contact_h2">¿Tienes<br><span class="accent">preguntas?</span></h2>
+        <p class="section-body" style="margin-top:16px" data-i18n="contact_body">
+          Estamos aquí para ayudarte. Ya sea que quieras saber más sobre nuestros productos, colaborar, o simplemente conversar sobre IA en español.
+        </p>
+        <div class="contact-info">
+          <div>
+            <div class="contact-item-label" data-i18n="contact_label_email">Email</div>
+            <div class="contact-item-val"><a href="mailto:hola@aprendeia.us">hola@aprendeia.us</a></div>
+          </div>
+          <div>
+            <div class="contact-item-label" data-i18n="contact_label_web">Web</div>
+            <div class="contact-item-val"><a href="https://aprendeia.us" target="_blank">aprendeia.us</a></div>
+          </div>
+          <div>
+            <div class="contact-item-label" data-i18n="contact_label_loc">Ubicación</div>
+            <div class="contact-item-val">New York City · Puerto Rico</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right reveal reveal-delay-1">
+        <div data-fs-success class="form-success" style="display:none">
+          <strong data-i18n="form_success_title">¡Mensaje recibido!</strong>
+          <p data-i18n="form_success_body">Te respondemos en menos de 48 horas. ¡Gracias!</p>
+        </div>
+        <div data-fs-error style="display:none;margin-bottom:12px;font-size:13px;color:#EF4444;font-weight:300"></div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="form_name">Nombre</label>
+              <input type="text" name="nombre" placeholder="Tu nombre" required data-fs-field>
+            </div>
+            <div class="form-group">
+              <label data-i18n="form_email">Email</label>
+              <input type="email" name="email" placeholder="tu@email.com" required data-fs-field>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_topic">Tema</label>
+            <select name="tema" data-fs-field>
+              <option value="" data-i18n="form_topic_select">Selecciona un tema</option>
+              <option value="guia" data-i18n="form_topic_1">Información sobre la guía</option>
+              <option value="curso" data-i18n="form_topic_2">Cursos y membresía</option>
+              <option value="collab" data-i18n="form_topic_3">Colaboración o alianza</option>
+              <option value="otro" data-i18n="form_topic_4">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form_msg">Mensaje</label>
+            <textarea name="mensaje" placeholder="Cuéntanos sobre ti y cómo podemos ayudarte..." data-fs-field></textarea>
+          </div>
+          <button type="submit" class="btn-submit" data-i18n="form_submit" data-fs-submit-btn>Enviar Mensaje →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">aprende<strong>IA</strong></div>
+    <div class="footer-sub">un producto de Simply Living Green LLC</div>
+  </div>
+  <div class="footer-links">
+    <a href="#about" data-i18n="nav_about">Nosotros</a>
+    <a href="#product" data-i18n="nav_product">Producto</a>
+    <a href="/guia">Comprar la Guía</a>
+    <a href="#contact" data-i18n="nav_contact">Contacto</a>
+  </div>
+  <div class="footer-legal">
+    © 2026 Simply Living Green LLC<br>
+    Aprende IA es un producto de Simply Living Green LLC<br>
+    aprendeia.us
+  </div>
+</footer>
+
+<script>
+// ── LANGUAGE TOGGLE ──
+const i18n = {
+  es: {
+    nav_about: 'Nosotros', nav_product: 'Producto', nav_ladder: 'Formación',
+    nav_contact: 'Contacto', nav_cta: 'Únete →',
+    hero_eyebrow: 'IA para emprendedores latinos · USA',
+    hero_h1: 'Aprende<br><span class="italic">inteligencia</span><br><span class="thin">artificial.</span>',
+    hero_sub: 'Guías, cursos y recursos de <em>inteligencia artificial</em> en español — diseñados para emprendedores latinos en los Estados Unidos.<span class="en-hint">AI education in Spanish for US Latino entrepreneurs.</span>',
+    hero_cta_primary: 'Quiero la Guía →', hero_cta_ghost: 'Ver el producto',
+    hero_stat1: 'Latinos en EE.UU.', hero_stat2: 'son emprendedores', hero_stat3: 'recursos de IA en español',
+    about_eyebrow: 'Quiénes Somos',
+    about_h2: 'La IA no tiene que<br>ser <span class="accent">complicada</span><br><span class="thin">ni en inglés.</span>',
+    about_body: 'Aprende IA es una marca de Simply Living Green LLC — una compañía de educación en inteligencia artificial para emprendedores latinos en los Estados Unidos.',
+    pillar1_title: '100% en Español', pillar1_desc: 'Contenido creado nativamente en español, no traducido',
+    pillar2_title: 'Para Tu Negocio', pillar2_desc: 'Aplicaciones prácticas, no teoría. Resultados reales.',
+    pillar3_title: 'NYC + Puerto Rico', pillar3_desc: 'Nacidos en la comunidad latina de los Estados Unidos',
+    pillar4_title: 'Siempre Accesible', pillar4_desc: 'Precios pensados para el emprendedor que está empezando',
+    badge_text: 'Latinos en EE.UU.<br>merecen aprender IA en su idioma',
+    product_eyebrow: 'Primer Producto · Disponible Pronto',
+    product_h2: 'La guía definitiva<br>para usar <span class="amber">Claude AI</span><br>en tu negocio.',
+    product_body: 'Una guía práctica y completa en español. Aprende a configurar Claude, crear agentes personalizados, organizar tu flujo de trabajo con IA, y usar skills para automatizar tareas repetitivas.',
+    pi1: 'Configuración completa de Claude AI paso a paso', pi2: 'Cómo crear y usar agentes personalizados',
+    pi3: 'Estructura de carpetas y flujo de trabajo con IA', pi4: 'Prompts en español listos para usar',
+    pi5: 'Acceso a actualizaciones futuras', product_cta: 'Quiero la Guía →',
+    product_card_title: 'Guía: Claude AI en Español',
+    product_card_sub: 'Tu primer paso en el mundo de la\ninteligencia artificial para negocios',
+    product_card_badge: 'Próximamente',
+    forwho_eyebrow: '¿Para Quién Es?',
+    forwho_h2: 'Para el emprendedor<br>latino que quiere<br><span class="accent">crecer con IA.</span>',
+    prof1_title: 'El dueño de negocio', prof1_desc: 'Tienes un negocio funcionando pero quieres usar IA para ahorrar tiempo y hacer más con menos.',
+    prof2_title: 'El que está empezando', prof2_desc: 'No tienes presencia online todavía. Quieres construir desde cero usando herramientas modernas.',
+    prof3_title: 'El creador de contenido', prof3_desc: 'Creas contenido en español y quieres automatizar procesos y escalar sin perder tu voz.',
+    prof4_title: 'El profesional independiente', prof4_desc: 'Freelancer, consultor, coach. Quieres usar IA para ofrecer más valor a tus clientes.',
+    forwho_quote: '"La inteligencia artificial no va a reemplazar a los emprendedores latinos — pero los emprendedores latinos que saben usar IA van a reemplazar a los que no."',
+    forwho_attr: '— Filosofía de Aprende IA',
+    ladder_eyebrow: 'Ruta de Aprendizaje',
+    ladder_h2: 'Desde tu primera guía<br>hasta <span class="accent">dominar la IA.</span>',
+    step1_title: 'La Guía', step1_desc: 'Configura Claude AI desde cero y empieza a usarlo en tu negocio esta semana.',
+    step2_title: 'El Curso', step2_desc: 'Video curso completo: agentes, automatización y estrategia de IA para tu industria.',
+    step3_title: 'Membresía', step3_desc: 'Comunidad, actualizaciones mensuales y herramientas nuevas cada mes.',
+    step4_title: 'Done-With-You', step4_desc: 'Implementamos tu estrategia de IA juntos. Sesiones 1:1, configuración personalizada.',
+    step5_title: 'Agencia IA', step5_desc: 'Implementación completa de IA en tu empresa. Para negocios listos para transformarse.',
+    waitlist_eyebrow: '· Lanzamiento Pronto ·',
+    waitlist_h2: 'Sé de los <span class="amber">primeros 100</span><br>en acceder.',
+    waitlist_sub: 'Únete a la lista de espera y recibe la guía a precio de lanzamiento ($19.99). Los primeros 100 también recibirán un prompt pack de regalo.',
+    waitlist_placeholder: 'tu@email.com', waitlist_btn: 'Quiero Acceso →',
+    waitlist_success: '¡Listo! Te avisamos en cuanto esté disponible.',
+    waitlist_note: 'Sin spam. Solo te avisamos cuando la guía esté lista.',
+    contact_eyebrow: 'Contacto',
+    contact_h2: '¿Tienes<br><span class="accent">preguntas?</span>',
+    contact_body: 'Estamos aquí para ayudarte. Ya sea que quieras saber más sobre nuestros productos, colaborar, o simplemente conversar sobre IA en español.',
+    contact_label_email: 'Email', contact_label_web: 'Web', contact_label_loc: 'Ubicación',
+    form_name: 'Nombre', form_email: 'Email', form_topic: 'Tema',
+    form_topic_select: 'Selecciona un tema', form_topic_1: 'Información sobre la guía',
+    form_topic_2: 'Cursos y membresía', form_topic_3: 'Colaboración o alianza', form_topic_4: 'Otro',
+    form_msg: 'Mensaje', form_submit: 'Enviar Mensaje →',
+    form_success_title: '¡Mensaje recibido!', form_success_body: 'Te respondemos en menos de 48 horas. ¡Gracias!',
+  },
+  en: {
+    nav_about: 'About', nav_product: 'Product', nav_ladder: 'Training',
+    nav_contact: 'Contact', nav_cta: 'Join →',
+    hero_eyebrow: 'AI for US Latino Entrepreneurs',
+    hero_h1: 'Learn<br><span class="italic">artificial</span><br><span class="thin">intelligence.</span>',
+    hero_sub: 'Guides, courses and resources on <em>artificial intelligence</em> in Spanish — built for Latino entrepreneurs in the United States.<span class="en-hint">Educación de IA en español para emprendedores latinos.</span>',
+    hero_cta_primary: 'Get the Guide →', hero_cta_ghost: 'See the product',
+    hero_stat1: 'Latinos in the U.S.', hero_stat2: 'are entrepreneurs', hero_stat3: 'AI resources in Spanish',
+    about_eyebrow: 'Who We Are',
+    about_h2: 'AI doesn\'t have to be<br><span class="accent">complicated</span><br><span class="thin">or in English.</span>',
+    about_body: 'Aprende IA is a brand of Simply Living Green LLC — an AI education company for Latino entrepreneurs in the United States. We create guides, courses and resources that make AI simple and applicable to your business.',
+    pillar1_title: '100% in Spanish', pillar1_desc: 'Content created natively in Spanish, not translated',
+    pillar2_title: 'For Your Business', pillar2_desc: 'Practical applications, not theory. Real results.',
+    pillar3_title: 'NYC + Puerto Rico', pillar3_desc: 'Born from the Latino community in the United States',
+    pillar4_title: 'Always Accessible', pillar4_desc: 'Pricing designed for the entrepreneur who is just starting',
+    badge_text: 'Latinos in the U.S.<br>deserve to learn AI in their language',
+    product_eyebrow: 'First Product · Coming Soon',
+    product_h2: 'The definitive guide<br>to using <span class="amber">Claude AI</span><br>in your business.',
+    product_body: 'A complete and practical guide in Spanish. Learn to set up Claude, create custom agents, organize your AI workflow, and use skills to automate repetitive tasks in your business.',
+    pi1: 'Complete Claude AI setup step by step', pi2: 'How to create and use custom agents',
+    pi3: 'Folder structure and AI workflow', pi4: 'Ready-to-use prompts in Spanish',
+    pi5: 'Access to future updates', product_cta: 'Get the Guide →',
+    product_card_title: 'Guide: Claude AI in Spanish',
+    product_card_sub: 'Your first step into the world of\nAI for business',
+    product_card_badge: 'Coming Soon',
+    forwho_eyebrow: 'Who Is It For?',
+    forwho_h2: 'For the Latino<br>entrepreneur who wants<br><span class="accent">to grow with AI.</span>',
+    prof1_title: 'The business owner', prof1_desc: 'You have a running business but want to use AI to save time and do more with less.',
+    prof2_title: 'The beginner', prof2_desc: 'You don\'t have an online presence yet. You want to build from scratch using modern tools.',
+    prof3_title: 'The content creator', prof3_desc: 'You create content in Spanish and want to automate processes and scale without losing your voice.',
+    prof4_title: 'The independent professional', prof4_desc: 'Freelancer, consultant, coach. You want to use AI to offer more value to your clients.',
+    forwho_quote: '"AI won\'t replace Latino entrepreneurs — but Latino entrepreneurs who know how to use AI will replace those who don\'t."',
+    forwho_attr: '— Aprende IA Philosophy',
+    ladder_eyebrow: 'Learning Path',
+    ladder_h2: 'From your first guide<br>to <span class="accent">mastering AI.</span>',
+    step1_title: 'The Guide', step1_desc: 'Set up Claude AI from scratch and start using it in your business this week.',
+    step2_title: 'The Course', step2_desc: 'Full video course: agents, automation and AI strategy for your industry.',
+    step3_title: 'Membership', step3_desc: 'Community, monthly updates and new tools every month. Always at the forefront.',
+    step4_title: 'Done-With-You', step4_desc: 'We implement your AI strategy together. 1:1 sessions, custom configuration.',
+    step5_title: 'AI Agency', step5_desc: 'Full AI implementation in your company. For businesses ready to transform.',
+    waitlist_eyebrow: '· Launching Soon ·',
+    waitlist_h2: 'Be among the <span class="amber">first 100</span><br>to get access.',
+    waitlist_sub: 'Join the waitlist and get the guide at launch price ($19.99). The first 100 will also receive a free prompt pack — in Spanish.',
+    waitlist_placeholder: 'your@email.com', waitlist_btn: 'I Want Access →',
+    waitlist_success: 'Done! We\'ll notify you as soon as it\'s available.',
+    waitlist_note: 'No spam. We only notify you when the guide is ready.',
+    contact_eyebrow: 'Contact',
+    contact_h2: 'Have<br><span class="accent">questions?</span>',
+    contact_body: 'We\'re here to help. Whether you want to learn more about our products, collaborate, or simply talk about AI in Spanish.',
+    contact_label_email: 'Email', contact_label_web: 'Web', contact_label_loc: 'Location',
+    form_name: 'Name', form_email: 'Email', form_topic: 'Topic',
+    form_topic_select: 'Select a topic', form_topic_1: 'Guide information',
+    form_topic_2: 'Courses & membership', form_topic_3: 'Collaboration or partnership', form_topic_4: 'Other',
+    form_msg: 'Message', form_submit: 'Send Message →',
+    form_success_title: 'Message received!', form_success_body: 'We\'ll respond within 48 hours. Thank you!',
+  }
+};
+
+let currentLang = 'es';
+
+function toggleLang(){
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  document.getElementById('lang-es').classList.toggle('active', currentLang === 'es');
+  document.getElementById('lang-en').classList.toggle('active', currentLang === 'en');
+  document.documentElement.lang = currentLang;
+  applyLang();
+}
+
+function applyLang(){
+  const t = i18n[currentLang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(t[key] !== undefined) el.placeholder = t[key];
+  });
+}
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30);
+});
+
+// ── MOBILE MENU ──
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('menuOverlay').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('menuOverlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── SCROLL REVEAL ──
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// ── FORMSPREE INIT ──
+window.formspree = window.formspree || function(){(formspree.q=formspree.q||[]).push(arguments)};
+formspree('initForm',{formElement:'#waitlist-form', formId:'meewwdgl'});
+formspree('initForm',{formElement:'#contact-form',  formId:'xaqzzkoq'});
+
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>

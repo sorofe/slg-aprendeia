@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src=""></script>
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  if(params.has('gracias') || params.has('thanks')) {
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
+      var t = document.getElementById('page-thanks');
+      if(t) t.classList.add('on');
+    });
+  }
+})();
+</script>
+</head>
+<body>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style></style>
+<style>
+:root{
+  --indigo:#2D1B69; --indigo-deep:#160C3D; --amber:#F59E0B; --amber-br:#FBBF24;
+  --teal:#0D9488; --cream:#FEFCE8; --ink:#1C1917; --paper:#FFFFFF; --muted:#6B6358;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:#f3f1ea;font-family:'Inter',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
+.page{display:none;}
+.page.on{display:block;}
+.wrap{max-width:1040px;margin:0 auto;background:var(--paper);box-shadow:0 4px 40px rgba(22,12,61,.10);overflow:hidden;}
+
+/* progress steps */
+.steps{display:flex;justify-content:center;gap:0;background:var(--indigo-deep);padding:13px 0;}
+.steps .st{display:flex;align-items:center;gap:9px;color:rgba(254,252,232,.45);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:0 22px;position:relative;}
+.steps .st .dot{width:21px;height:21px;border-radius:50%;border:1.5px solid rgba(254,252,232,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+.steps .st.act{color:#fff;}
+.steps .st.act .dot{background:var(--amber);border-color:var(--amber);color:#160C3D;}
+.steps .st.done .dot{background:var(--teal);border-color:var(--teal);color:#fff;}
+.steps .st.done{color:rgba(254,252,232,.7);}
+.steps .sep{width:34px;height:1.5px;background:rgba(254,252,232,.18);align-self:center;}
+
+/* atoms */
+.wm{font-weight:300;letter-spacing:-.02em;line-height:1;white-space:nowrap;}
+.wm .a{font-weight:300;color:var(--indigo);}
+.wm .ia{font-weight:700;color:var(--amber);}
+.wm.dk .a{color:var(--cream);}
+.wm.dk .ia{color:var(--amber-br);}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:#160C3D;font-weight:800;
+  font-size:19px;border:none;border-radius:12px;padding:18px 34px;text-decoration:none;cursor:pointer;font-family:inherit;
+  box-shadow:0 8px 22px rgba(245,158,11,.34);transition:transform .15s ease,box-shadow .15s ease;letter-spacing:.01em;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(245,158,11,.42);}
+.btn .sm{font-weight:600;font-size:13px;opacity:.7;}
+
+.kick{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-br);font-weight:700;margin:0 0 18px;}
+.h1{font-family:'Playfair Display',serif;font-weight:800;font-size:54px;line-height:1.03;margin:0;color:#fff;letter-spacing:-.015em;}
+.h1 .em{font-style:italic;color:var(--amber-br);}
+.lead{font-size:18px;line-height:1.62;color:rgba(254,252,232,.84);font-weight:300;margin:22px 0 0;max-width:30em;}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);font-weight:800;margin:0 0 12px;}
+.h2{font-family:'Playfair Display',serif;font-weight:700;font-size:36px;line-height:1.12;color:var(--indigo);margin:0;letter-spacing:-.01em;}
+.h2.lt{color:#fff;}
+.p{font-size:15.5px;line-height:1.7;color:#433d34;}
+.pad{padding:62px 72px;}
+.orn{position:absolute;border-radius:50%;border:1px solid rgba(251,191,36,.13);pointer-events:none;}
+
+.pricebar{display:flex;align-items:center;gap:16px;margin:30px 0 0;}
+.was{font-size:22px;color:rgba(254,252,232,.55);text-decoration:line-through;font-weight:500;}
+.now{font-family:'Playfair Display',serif;font-size:50px;font-weight:800;color:#fff;line-height:1;}
+.launch{background:rgba(13,148,136,.22);border:1px solid rgba(45,212,191,.45);color:#5eead4;font-size:12px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:7px;}
+.microline{font-size:13px;color:rgba(254,252,232,.66);margin:14px 0 0;display:flex;align-items:center;gap:7px;}
+
+/* hero */
+.hero{background:var(--indigo);color:var(--cream);padding:60px 72px 66px;position:relative;overflow:hidden;}
+
+/* book mockup */
+.bookwrap{perspective:1500px;display:flex;justify-content:center;}
+.book{position:relative;width:288px;height:392px;transform:rotateY(-19deg) rotateX(2deg);transform-style:preserve-3d;
+  background:var(--indigo);border-radius:3px 7px 7px 3px;box-shadow:-22px 26px 50px rgba(22,12,61,.42), inset -1px 0 0 rgba(255,255,255,.08);
+  padding:30px 26px;display:flex;flex-direction:column;justify-content:space-between;color:var(--cream);overflow:hidden;}
+.book::before{content:"";position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,.05) 60%,rgba(255,255,255,.07));}
+.book::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid rgba(251,191,36,.16);right:-180px;top:-120px;}
+.book .bk{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--amber-br);font-weight:600;position:relative;z-index:2;}
+.book h3{font-family:'Playfair Display',serif;font-weight:800;font-size:31px;line-height:1.02;margin:0;color:#fff;position:relative;z-index:2;letter-spacing:-.01em;}
+.book h3 .em{font-style:italic;color:var(--amber-br);}
+.book .bsub{font-size:11.5px;line-height:1.45;color:rgba(254,252,232,.8);font-weight:300;margin:12px 0 0;position:relative;z-index:2;}
+.book .brule{width:42px;height:3px;background:var(--amber);border-radius:2px;margin:14px 0 0;position:relative;z-index:2;}
+.book .bfoot{font-size:10px;color:rgba(254,252,232,.72);position:relative;z-index:2;line-height:1.5;}
+.book .bfoot b{color:#fff;font-weight:600;}
+
+/* empathy */
+.empbox{background:var(--cream);border:1px solid #efe6c6;border-radius:16px;padding:32px 36px;}
+.empbox .q{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;line-height:1.4;color:var(--indigo-deep);margin:0;}
+
+/* module grid */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;}
+.mcard{display:flex;gap:15px;align-items:flex-start;border:1px solid #ece6da;border-radius:13px;padding:17px 19px;background:#fff;}
+.mcard .mn{flex:none;width:38px;height:38px;border-radius:10px;background:var(--indigo);color:var(--amber-br);
+  font-family:'Playfair Display',serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;}
+.mcard .mt{font-size:15px;font-weight:700;color:var(--indigo-deep);line-height:1.25;margin:0 0 3px;}
+.mcard .md{font-size:12.8px;color:#6a6357;line-height:1.45;margin:0;}
+
+/* value stack */
+.stack{background:#fff;border:2px solid var(--indigo);border-radius:20px;overflow:hidden;box-shadow:0 18px 50px rgba(22,12,61,.13);}
+.stack .sh{background:var(--indigo);color:#fff;padding:22px 32px;font-family:'Playfair Display',serif;font-weight:700;font-size:24px;}
+.stack .si{display:flex;align-items:center;gap:16px;padding:17px 32px;border-bottom:1px solid #efebe1;}
+.stack .si .ic{flex:none;width:30px;height:30px;border-radius:8px;background:#FBF4DF;color:var(--amber);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;}
+.stack .si .nm{flex:1;font-size:15.5px;color:var(--indigo-deep);font-weight:600;line-height:1.3;}
+.stack .si .nm small{display:block;font-weight:400;color:#7a7263;font-size:12.5px;margin-top:1px;}
+.stack .si .vl{font-size:14px;color:#9a917f;font-weight:600;}
+.stack .tot{display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:#FBFAF4;}
+.stack .tot .tl{font-size:15px;color:#6a6357;font-weight:600;}
+.stack .tot .tv{font-family:'Playfair Display';font-size:22px;color:#9a917f;font-weight:700;text-decoration:line-through;}
+.stack .pay{background:var(--indigo-deep);color:#fff;padding:26px 32px;display:flex;justify-content:space-between;align-items:center;}
+.stack .pay .pl{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--amber-br);font-weight:700;}
+.stack .pay .pn{font-family:'Playfair Display';font-size:46px;font-weight:800;line-height:1;}
+.stack .pay .pn small{font-size:17px;font-weight:600;color:rgba(254,252,232,.7);}
+
+/* preview band */
+.peek{display:inline-flex;align-items:center;gap:9px;background:#FBF4DF;border:1px dashed #e0c896;border-radius:10px;padding:11px 16px;font-size:13.5px;color:#7a5a18;font-weight:600;}
+.peek b{color:var(--indigo-deep);}
+
+/* testimonials */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;}
+.tcard{border:1px solid #ece6da;border-radius:14px;padding:22px 22px 20px;background:#fff;}
+.tcard .stars{color:var(--amber);font-size:14px;letter-spacing:2px;margin-bottom:10px;}
+.tcard .tq{font-size:14px;line-height:1.6;color:#3a352e;margin:0 0 16px;}
+.tcard .who{display:flex;align-items:center;gap:11px;}
+.tcard .av{flex:none;width:40px;height:40px;border-radius:50%;background:var(--indigo);color:var(--amber-br);display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Playfair Display';font-size:16px;}
+.tcard .nm{font-size:13.5px;font-weight:700;color:var(--indigo-deep);line-height:1.2;}
+.tcard .biz{font-size:12px;color:#7a7263;}
+.ph-note{font-size:11px;color:#a99f8b;font-style:italic;margin-top:14px;}
+
+/* faq */
+.faq{border-top:1px solid #ece6da;}
+details.qa{border-bottom:1px solid #ece6da;padding:18px 4px;}
+details.qa summary{list-style:none;cursor:pointer;font-size:17px;font-weight:700;color:var(--indigo-deep);display:flex;justify-content:space-between;align-items:center;gap:16px;}
+details.qa summary::-webkit-details-marker{display:none;}
+details.qa summary .pl{flex:none;color:var(--amber);font-size:22px;font-weight:600;transition:transform .2s;}
+details.qa[open] summary .pl{transform:rotate(45deg);}
+details.qa p{font-size:14.5px;line-height:1.65;color:#4a443b;margin:13px 0 2px;}
+
+/* final cta + footer */
+.finalcta{background:var(--indigo);color:var(--cream);padding:64px 72px;text-align:center;position:relative;overflow:hidden;}
+.foot{background:var(--indigo-deep);color:rgba(254,252,232,.62);padding:30px 72px;font-size:12.5px;display:flex;justify-content:space-between;align-items:center;}
+.foot a{color:rgba(254,252,232,.78);text-decoration:none;}
+
+/* ============ UPSELL (page 2) ============ */
+.u-hero{background:var(--indigo-deep);color:var(--cream);padding:54px 72px 48px;position:relative;overflow:hidden;text-align:center;}
+.confirm{display:inline-flex;align-items:center;gap:10px;background:rgba(13,148,136,.18);border:1px solid rgba(45,212,191,.45);
+  color:#5eead4;font-size:13px;font-weight:700;letter-spacing:.04em;padding:9px 18px;border-radius:30px;margin-bottom:26px;}
+.confirm .tick{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;}
+.u-wait{font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber-br);font-weight:700;margin:0 0 14px;}
+.u-h{font-family:'Playfair Display',serif;font-weight:800;font-size:50px;line-height:1.04;margin:0;color:#fff;letter-spacing:-.015em;}
+.u-h .em{font-style:italic;color:var(--amber-br);}
+.u-sub{font-size:18px;line-height:1.6;color:rgba(254,252,232,.84);font-weight:300;margin:20px auto 0;max-width:34em;}
+
+.offerbox{background:#fff;border:2px solid var(--amber);border-radius:22px;overflow:hidden;box-shadow:0 22px 60px rgba(22,12,61,.16);}
+.offerbox .ribbon{background:var(--amber);color:#160C3D;text-align:center;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:9px;}
+.offerbox .ob-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.ob-l{padding:40px 42px;border-right:1px solid #efe6d6;}
+.ob-l h3{font-family:'Playfair Display',serif;font-weight:800;font-size:32px;color:var(--indigo);margin:0 0 6px;line-height:1.08;}
+.ob-l .tag{font-size:13px;color:var(--teal);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin:0 0 20px;}
+.ob-feat{display:flex;gap:11px;align-items:flex-start;margin-bottom:13px;}
+.ob-feat .ck{flex:none;width:22px;height:22px;border-radius:6px;background:#FBF4DF;color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px;}
+.ob-feat .tx{font-size:14.5px;line-height:1.45;color:#3a352e;}
+.ob-feat .tx b{color:var(--indigo-deep);}
+.ob-r{padding:40px 42px;background:#FBFAF4;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.ob-cat{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;margin-bottom:24px;}
+.ob-cat span{font-size:11.5px;color:#6a6357;background:#fff;border:1px solid #ece6da;border-radius:7px;padding:7px 9px;font-weight:600;}
+.ob-price{display:flex;align-items:baseline;gap:11px;justify-content:center;}
+.ob-price .w{font-size:24px;color:#b6ad98;text-decoration:line-through;font-weight:600;}
+.ob-price .n{font-family:'Playfair Display';font-size:56px;font-weight:800;color:var(--indigo);line-height:1;}
+.ob-once{font-size:12.5px;color:#8a8170;margin:6px 0 0;font-weight:600;letter-spacing:.02em;}
+
+.u-actions{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:34px;}
+.u-yes{display:inline-flex;align-items:center;gap:11px;background:var(--teal);color:#fff;font-weight:800;font-size:20px;border:none;border-radius:13px;padding:20px 44px;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px rgba(13,148,136,.34);transition:transform .15s,box-shadow .15s;}
+.u-yes:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(13,148,136,.42);}
+.u-no{background:none;border:none;color:#8a8170;font-size:13.5px;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:3px;}
+.u-no:hover{color:#5a5246;}
+.u-fine{font-size:12px;color:#a99f8b;max-width:30em;text-align:center;line-height:1.5;margin:2px auto 0;}
+
+/* thank you */
+.ty{background:var(--indigo);color:var(--cream);padding:90px 72px;text-align:center;position:relative;overflow:hidden;}
+.ty .tyseal{width:88px;height:88px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 26px;box-shadow:0 10px 30px rgba(13,148,136,.4);}
+</style>
+
+
+
+<div data-sales-funnel="aprende-ia">
+
+  <!-- ================= PAGE 1 — SALES ================= -->
+  <div class="page on" id="page-sales" data-screen-label="Página 1 — Ventas">
+    <div class="wrap">
+
+      <div class="steps">
+        <div class="st act"><span class="dot">1</span> Tu kit completo</div>
+        <div class="sep"></div>
+        <div class="st"><span class="dot">2</span> Oferta especial</div>
+        <div class="sep"></div>
+        <div class="st"><span class="dot">✓</span> Listo</div>
+      </div>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="orn" style="width:540px;height:540px;right:-200px;top:-160px;"></div>
+        <div class="orn" style="width:360px;height:360px;right:-120px;top:-70px;border-color:rgba(251,191,36,.09);"></div>
+        <div style="display:flex;align-items:center;gap:13px;position:relative;z-index:2;margin-bottom:38px;">
+          <svg viewBox="0 0 100 100" width="46" height="46" aria-label="Aprende IA"><defs><clipPath id="la"><circle cx="50" cy="50" r="49"></circle></clipPath></defs><g clip-path="url(#la)"><circle cx="50" cy="50" r="49" fill="#2D1B69"></circle><path d="M16,100 C16,75 33,65 50,65 C67,65 84,75 84,100 Z" fill="#fff" fill-opacity="0.82"></path><circle cx="50" cy="42" r="21" fill="#160C3D" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"></circle><circle cx="50" cy="45" r="12" fill="#F59E0B" fill-opacity="0.20"></circle><text x="50" y="43.5" text-anchor="middle" font-family="Inter,sans-serif" font-weight="700" font-size="17" fill="#FBBF24">IA</text></g></svg>
+          <span class="wm dk" style="font-size:23px;"><span class="a">aprende</span><span class="ia">IA</span></span>
+          <span style="margin-left:auto;font-size:13px;color:rgba(254,252,232,.7);font-weight:600;">aprendeia.us</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;">
+          <div>
+            <p class="kick">Guía Completa · Edición 2026</p>
+            <h1 class="h1">Aprende a usar la <span class="em">inteligencia artificial</span> para hacer crecer tu negocio.</h1>
+            <p class="lead">El manual práctico, en español, para emprendedores latinos. Nueve módulos paso a paso, más de 180 prompts listos para copiar, y todo lo que necesitas para empezar hoy — sin tecnicismos.</p>
+            <div class="pricebar">
+              <span class="was">$49</span>
+              <span class="now">$19.99</span>
+              <span class="launch">Precio de lanzamiento</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:18px;margin-top:24px;">
+              <a class="btn" href="#comprar" data-buy="">Comprar ahora <span class="sm">· acceso inmediato</span></a>
+            </div>
+            <p class="microline">⚡ Acceso inmediato · Pago único, sin suscripción</p>
+          </div>
+          <div class="bookwrap">
+            <div class="book">
+              <div class="bk">Guía Completa · 2026</div>
+              <div>
+                <h3>Domina la <span class="em">IA</span><br>para tu negocio</h3>
+                <div class="brule"></div>
+                <p class="bsub">Inteligencia artificial en español, para emprendedores latinos.</p>
+              </div>
+              <div class="bfoot">Por <b>Aprende IA</b><br>aprendeia.us</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EMPATHY -->
+      <section class="pad" style="background:#fff;">
+        <p class="eyebrow">Para quién es esta guía</p>
+        <h2 class="h2">Sabemos lo que se siente arrancar con todo en contra.</h2>
+        <div class="empbox" style="margin-top:24px;">
+          <p class="q">"Todo el mundo habla de la IA… pero los tutoriales están en inglés, llenos de palabras raras, y nadie explica cómo aplicarla a <span style="color:var(--amber);font-style:normal;font-weight:700;">mi</span> negocio."</p>
+        </div>
+        <p class="p" style="margin-top:26px;">Si alguna vez sentiste eso, esta guía es para ti. La escribimos emprendedores latinos, para emprendedores latinos: con recursos limitados, el doble de esfuerzo, y en un idioma que a veces no es el tuyo. La IA no resuelve todo — pero te devuelve <strong>tiempo</strong>, te da <strong>claridad</strong> y te presta las <strong>palabras</strong> para competir con más fuerza.</p>
+      </section>
+
+      <!-- MODULES -->
+      <section class="pad" style="background:#FBFAF4;">
+        <p class="eyebrow">Lo que vas a dominar</p>
+        <h2 class="h2">Nueve módulos. De cero a experto.</h2>
+        <div class="mgrid">
+          <div class="mcard"><div class="mn">0</div><div><p class="mt">¿Por qué la IA, ahora?</p><p class="md">El momento, la oportunidad latina y tu glosario de arranque.</p></div></div>
+          <div class="mcard"><div class="mn">1</div><div><p class="mt">Instalación y configuración</p><p class="md">Crea tu cuenta y ten tu primera conversación útil.</p></div></div>
+          <div class="mcard"><div class="mn">2</div><div><p class="mt">Cómo hablarle a la IA</p><p class="md">La fórmula del prompt perfecto y los errores a evitar.</p></div></div>
+          <div class="mcard"><div class="mn">3</div><div><p class="mt">Memoria, proyectos y contexto</p><p class="md">Enséñale tu negocio una sola vez.</p></div></div>
+          <div class="mcard"><div class="mn">4</div><div><p class="mt">180 prompts en español</p><p class="md">Listos para copiar, por categoría de negocio.</p></div></div>
+          <div class="mcard"><div class="mn">5</div><div><p class="mt">Plugins, conectores y MCP</p><p class="md">Conecta la IA con las herramientas que ya usas.</p></div></div>
+          <div class="mcard"><div class="mn">6</div><div><p class="mt">Skills: enseña tu negocio</p><p class="md">Convierte tus prompts favoritos en comandos de un clic.</p></div></div>
+          <div class="mcard"><div class="mn">7</div><div><p class="mt">Flujos de trabajo con IA</p><p class="md">Encadena herramientas y Skills en secuencias.</p></div></div>
+          <div class="mcard"><div class="mn">8</div><div><p class="mt">Casos de uso por industria</p><p class="md">35 prompts listos para 7 sectores de negocio.</p></div></div>
+          <div class="mcard"><div class="mn">9</div><div><p class="mt">Privacidad, ética y buenas prácticas</p><p class="md">Usa la IA con confianza y responsabilidad.</p></div></div>
+        </div>
+      </section>
+
+      <!-- VALUE STACK -->
+      <section class="pad" style="background:#fff;">
+        <p class="eyebrow" style="text-align:center;">El paquete completo</p>
+        <h2 class="h2" style="text-align:center;margin-bottom:34px;">Todo lo que recibes hoy</h2>
+        <div class="stack">
+          <div class="sh">Tu kit completo de IA en español</div>
+          <div class="si"><div class="ic">✓</div><div class="nm">Guía completa de 9 módulos<small>El manual paso a paso, +120 páginas</small></div><div class="vl">$39</div></div>
+          <div class="si"><div class="ic">✓</div><div class="nm">Companion: 180 Prompts en Español<small>Listos para copiar, organizados por categoría</small></div><div class="vl">$19</div></div>
+          <div class="si"><div class="ic">✓</div><div class="nm">Apéndice de referencia rápida + glosario<small>Consulta cualquier término en segundos</small></div><div class="vl">$9</div></div>
+          <div class="si"><div class="ic">✓</div><div class="nm">Plantillas de Skills y CLAUDE.md<small>Listas para personalizar con tu negocio</small></div><div class="vl">$9</div></div>
+          <div class="si"><div class="ic">✓</div><div class="nm">Plan de acción de 4 semanas<small>Un camino claro para implementar todo</small></div><div class="vl">$5</div></div>
+          <div class="tot"><span class="tl">Valor real del paquete</span><span class="tv">$81</span></div>
+          <div class="pay"><span class="pl">Hoy pagas solo</span><span class="pn">$19.99 <small>USD · pago único</small></span></div>
+        </div>
+        <div style="text-align:center;margin-top:30px;">
+          <a class="btn" href="#comprar" data-buy="">Quiero mi kit completo · $19.99</a>
+          <p class="microline" style="justify-content:center;color:#8a8170;">⚡ Acceso inmediato tras tu compra</p>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="pad" style="background:#FBFAF4;">
+        <p class="eyebrow">Lo que dicen</p>
+        <h2 class="h2">Emprendedores que ya están usando la IA</h2>
+        <div class="tgrid">
+          <div class="tcard"><div class="stars">★★★★★</div><p class="tq">"En una semana automaticé mis respuestas a clientes y mis publicaciones. Lo que antes me tomaba horas, ahora son minutos."</p><div class="who"><div class="av">M</div><div><div class="nm">María G.</div><div class="biz">Repostería · Houston, TX</div></div></div></div>
+          <div class="tcard"><div class="stars">★★★★★</div><p class="tq">"Por fin algo en español y sin tecnicismos. Los prompts los copio y pego — funcionan tal cual para mi negocio."</p><div class="who"><div class="av">J</div><div><div class="nm">Jorge R.</div><div class="biz">Servicios de limpieza · Phoenix, AZ</div></div></div></div>
+          <div class="tcard"><div class="stars">★★★★★</div><p class="tq">"Vale muchísimo más de lo que cuesta. El plan de 4 semanas me dio la estructura que me faltaba para empezar."</p><div class="who"><div class="av">L</div><div><div class="nm">Lucía M.</div><div class="biz">Marketing freelance · Miami, FL</div></div></div></div>
+        </div>
+        <p class="ph-note">Testimonios de ejemplo — reemplázalos con reseñas reales cuando las tengas.</p>
+      </section>
+
+      <!-- FAQ -->
+      <section class="pad" style="background:#fff;">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2 class="h2" style="margin-bottom:18px;">Antes de que te decidas</h2>
+        <div class="faq">
+          <details class="qa" open=""><summary>¿Necesito saber de tecnología? <span class="pl">+</span></summary><p>No. La guía está escrita para principiantes, en español claro y paso a paso. Si sabes usar WhatsApp, puedes seguir esta guía.</p></details>
+          <details class="qa"><summary>¿Funciona en mi país? <span class="pl">+</span></summary><p>Sí. Las herramientas y los prompts funcionan desde cualquier país de habla hispana. Todo lo que necesitas es internet.</p></details>
+          <details class="qa"><summary>¿En qué formato lo recibo? <span class="pl">+</span></summary><p>Recibes archivos digitales (PDF) listos para leer en tu teléfono, tablet o computadora. Acceso inmediato después de tu compra.</p></details>
+          <details class="qa"><summary>¿Tengo que pagar otra herramienta de IA? <span class="pl">+</span></summary><p>La guía te muestra cómo empezar con planes gratuitos. Si más adelante quieres más potencia, te explicamos cuándo conviene pagar — pero no es obligatorio para aprovechar la guía.</p></details>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="finalcta">
+        <div class="orn" style="width:480px;height:480px;left:-180px;bottom:-200px;"></div>
+        <p class="kick" style="margin-bottom:14px;">Empieza hoy</p>
+        <h2 class="h2 lt" style="font-size:40px;max-width:14em;margin:0 auto;">La IA ya está cambiando los negocios. Que el tuyo no se quede atrás.</h2>
+        <div class="pricebar" style="justify-content:center;margin:26px 0 6px;">
+          <span class="was">$49</span><span class="now">$19.99</span><span class="launch">Lanzamiento</span>
+        </div>
+        <a class="btn" href="#comprar" data-buy="" style="margin-top:18px;">Comprar ahora · acceso inmediato</a>
+        <p class="microline" style="justify-content:center;">⚡ Pago único, sin suscripción · aprendeia.us</p>
+      </section>
+
+      <footer class="foot">
+        <span>© 2026 · aprendeia.us · hola<span style="white-space:nowrap">@</span>aprendeia.us</span>
+        <span><a href="#">Términos</a> · <a href="#">Privacidad</a></span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2 — UPSELL / OTO ================= -->
+  <div class="page" id="page-upsell" data-screen-label="Página 2 — Oferta especial">
+    <div class="wrap">
+
+      <div class="steps">
+        <div class="st done"><span class="dot">✓</span> Tu kit completo</div>
+        <div class="sep"></div>
+        <div class="st act"><span class="dot">2</span> Oferta especial</div>
+        <div class="sep"></div>
+        <div class="st"><span class="dot">✓</span> Listo</div>
+      </div>
+
+      <!-- UPSELL HERO -->
+      <section class="u-hero">
+        <div class="orn" style="width:520px;height:520px;right:-200px;top:-180px;"></div>
+        <div class="orn" style="width:420px;height:420px;left:-180px;bottom:-200px;border-color:rgba(251,191,36,.09);"></div>
+        <div class="confirm"><span class="tick">✓</span> ¡Tu pago fue confirmado! Tu kit ya está en camino a tu correo.</div>
+        <p class="u-wait">⏳ Espera — tu pedido aún no termina</p>
+        <h2 class="u-h">Suma <span class="em">500 prompts más</span> a tu arsenal,<br>una sola vez y al mejor precio.</h2>
+        <p class="u-sub">Acabas de recibir 180 prompts. Lleva tu biblioteca a <strong style="color:#fff;">680 en total</strong> con 500 prompts adicionales — más industrias, más tareas, más resultados. Esta oferta solo aparece aquí, en esta página.</p>
+      </section>
+
+      <!-- OFFER -->
+      <section class="pad" style="background:#fff;">
+        <div class="offerbox">
+          <div class="ribbon">★ Oferta exclusiva de una sola vez ★</div>
+          <div class="ob-body">
+            <div class="ob-l">
+              <h3>+500 Prompts en Español</h3>
+              <p class="tag">Pack de expansión profesional</p>
+              <div class="ob-feat"><span class="ck">✓</span><span class="tx"><b>500 prompts nuevos</b> — sin repetir ninguno de los 180 que ya tienes.</span></div>
+              <div class="ob-feat"><span class="ck">✓</span><span class="tx"><b>Más industrias y tareas:</b> ventas, finanzas, recursos humanos, atención al cliente, contenido y más.</span></div>
+              <div class="ob-feat"><span class="ck">✓</span><span class="tx"><b>Mismo formato copiar y pegar</b> con campos para personalizar a tu negocio.</span></div>
+              <div class="ob-feat"><span class="ck">✓</span><span class="tx"><b>Acceso inmediato</b> — se añade a tu descarga al instante.</span></div>
+            </div>
+            <div class="ob-r">
+              <div class="ob-cat">
+                <span>📈 Ventas</span><span>💰 Finanzas</span>
+                <span>👥 RR. HH.</span><span>💬 Atención</span>
+                <span>✍️ Contenido</span><span>⚙️ Operaciones</span>
+              </div>
+              <div class="ob-price"><span class="w">$39</span><span class="n">$19.97</span></div>
+              <p class="ob-once">Pago único · solo en esta página</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="u-actions">
+          <button class="u-yes" data-add-upsell="">Sí, agregar los 500 prompts por $19.97</button>
+          <button class="u-no" data-skip-upsell="">No gracias, continuar sin la oferta →</button>
+          <p class="u-fine">Esta oferta no volverá a aparecer. Se cobrará un único pago de $19.97 al mismo método que usaste. Tu compra anterior está segura de cualquier forma.</p>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <span>© 2026 · aprendeia.us · hola<span style="white-space:nowrap">@</span>aprendeia.us</span>
+        <span><a href="#">Términos</a> · <a href="#">Privacidad</a></span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ================= PAGE 3 — THANK YOU ================= -->
+  <div class="page" id="page-thanks" data-screen-label="Página 3 — Gracias">
+    <div class="wrap">
+      <section class="ty">
+        <div class="orn" style="width:480px;height:480px;right:-180px;top:-180px;"></div>
+        <div class="tyseal">✓</div>
+        <p class="kick" style="margin-bottom:14px;">Todo listo</p>
+        <h2 class="h2 lt" style="font-size:42px;max-width:15em;margin:0 auto;">¡Gracias por tu compra! Tu kit de IA ya está en tu correo.</h2>
+        <p class="lead" style="margin:22px auto 0;text-align:center;max-width:30em;">Revisa tu bandeja de entrada — encontrarás tus archivos de descarga y los próximos pasos. ¿Dudas? Escríbenos a hola<span style="white-space:nowrap">@</span>aprendeia.us</p>
+        <a class="btn" href="https://aprendeia.us" style="margin-top:30px;">Ir a aprendeia.us</a>
+      </section>
+      <footer class="foot">
+        <span>© 2026 · aprendeia.us · hola<span style="white-space:nowrap">@</span>aprendeia.us</span>
+        <span><a href="#">Términos</a> · <a href="#">Privacidad</a></span>
+      </footer>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const STRIPE_EBOOK  = 'https://buy.stripe.com/6oUcN40vN6jw7F2aiZbQY01';
+  const STRIPE_BUNDLE = 'https://buy.stripe.com/00w00idizdLYe3q1MtbQY03';
+  const show = (id) => {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+    const t = document.getElementById(id);
+    if(t) t.classList.add('on');
+    window.scrollTo(0,0);
+  };
+  document.querySelectorAll('[data-buy]').forEach(b => {
+    b.addEventListener('click', (e)=>{ e.preventDefault(); show('page-upsell'); });
+  });
+  document.querySelectorAll('[data-add-upsell]').forEach(b => {
+    b.addEventListener('click', (e)=>{ e.preventDefault(); window.location.href = STRIPE_BUNDLE; });
+  });
+  document.querySelectorAll('[data-skip-upsell]').forEach(b => {
+    b.addEventListener('click', (e)=>{ e.preventDefault(); window.location.href = STRIPE_EBOOK; });
+  });
+});
+</script>
+
+
+</body></html>
